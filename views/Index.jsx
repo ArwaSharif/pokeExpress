@@ -4,6 +4,9 @@ const myStyle = {
     color: '#ffffff',
     backgroundColor: '#000000',
 };
+const noListStyle = {
+    listStyle: 'none'
+}
     
 function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
@@ -17,8 +20,8 @@ class Index extends React.Component {
         <ul>
             {pokemon.map((pokemonObj, i) => {
                 return(
-                    <li>
-                        Pokemon Name: { capitalizeFirstLetter(pokemonObj.name)}
+                    <li style={noListStyle}>
+                       <a href={`/pokemon/${i}`}>{i}</a> Pokemon Name: { capitalizeFirstLetter(pokemonObj.name)}
                         
                     </li>
                 )
