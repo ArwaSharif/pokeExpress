@@ -3,13 +3,27 @@ const React = require("react");
 const myStyle = {
     color: '#ffffff',
     backgroundColor: '#000000',
-    };
+};
     
+function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
 class Index extends React.Component {
-  render() {
+    render() {
+      const {pokemon} = this.props
     return (
       <div>
         <h1 style={myStyle}> Index Page </h1>
+        <ul>
+            {pokemon.map((pokemonObj, i) => {
+                return(
+                    <li>
+                        Pokemon Name: { capitalizeFirstLetter(pokemonObj.name)}
+                        
+                    </li>
+                )
+            })}
+        </ul>
       </div>
     );
   }
