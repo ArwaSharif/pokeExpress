@@ -10,6 +10,7 @@ app.set('views', './views')
 app.set("view engine", "jsx");
 
 //I.N.D.U.C.E.S
+//Index
 app.get("/", (req, res) => {
   res.send("Welcome to the Pokemon App!");
 });
@@ -19,6 +20,10 @@ app.get("/pokemon", (req, res) => {
   res.render('Index', {pokemon});
 });
 
+//Show
+app.get('/pokemon/:id', (req, res) => {
+    res.send(req.params.id)
+})
 
 app.listen(PORT, () => {
   console.log(`listening on port: ${PORT}`);
