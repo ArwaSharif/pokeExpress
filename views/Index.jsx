@@ -1,32 +1,30 @@
 const React = require("react");
 
 const myStyle = {
-    color: '#ffffff',
-    backgroundColor: '#000000',
+  color: "#ffcb05",
 };
-const noListStyle = {
-    listStyle: 'none'
-}
-    
+
 function capitalizeFirstLetter(string) {
-    return string.charAt(0).toUpperCase() + string.slice(1);
+  return string.charAt(0).toUpperCase() + string.slice(1);
 }
 class Index extends React.Component {
-    render() {
-      const {pokemon} = this.props
+  render() {
+    const { pokemon } = this.props;
     return (
-      <div>
+      <div style={{ textAlign: "center", backgroundColor: '#3663ad', color: "#ffcb05", fontFamily: 'cursive', fontSize: '18pt' }}>
         <h1 style={myStyle}> Index Page </h1>
-        <ul>
-            {pokemon.map((pokemonObj, i) => {
-                return(
-                    <li style={noListStyle}>
-                       <a href={`/pokemon/${i}`}>{i}</a> Pokemon Name: { capitalizeFirstLetter(pokemonObj.name)}
-                        
-                    </li>
-                )
-            })}
-        </ul>
+        <ol>
+          {pokemon.map((pokemonObj, i) => {
+            return (
+              <li style={{listStyle: 'none'}}>
+                <a href={`/pokemon/${i}`} style={{color: "#ffcb05"}}>
+                  {"  "}{" "}
+                  <strong>{capitalizeFirstLetter(pokemonObj.name)}</strong>
+                </a>
+              </li>
+            );
+          })}
+        </ol>
       </div>
     );
   }
