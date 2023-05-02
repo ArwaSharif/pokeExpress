@@ -1,7 +1,17 @@
+require('dotenv').config()
 const express = require("express");
-const pokemon = require("./models/pokemon");
+const Pokemon = require("./models/pokemon");
 const app = express();
 const PORT = process.env.PORT || 3000;
+const { connect, connection } = require('mongoose')
+
+connect(process.env.MONGO_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+})
+connection.once('open', () => {
+  console.log('connected to mongo!')
+})
 
 //View Engine Middleware
 const reactViewsEngine = require("jsx-view-engine").createEngine();
@@ -24,9 +34,15 @@ app.get("/", (req, res) => {
   res.send("Welcome to the Pokemon App!");
 });
 
-app.get("/pokemon", (req, res) => {
-    // res.send(pokemon)
-  res.render('Index', {pokemon});
+app.get("/pokemon", async (req, res) => {
+  console.log(`Index Controller Func. running...`)
+
+  try {
+    const foundPokemon = await Pokemon.find({})
+    res.status(200).render('Index', {pokemon: foundPokemon})
+  } catch(err) {
+    res.status(400).send(err)
+  }
 });
 
 
@@ -37,15 +53,23 @@ app.get('/pokemon/new', (req, res) => {
 
 //Create
 
-app.post('/pokemon', (req, res) => {
-  pokemon.push(req.body)
-  res.redirect('/pokemon')
+app.post('/pokemon', async (req, res) => {
+  try{
+    const newPokemon = await Pokemon.create(req.body)
+    res.redirect('/pokemon')
+  } catch(err) {
+    res.status(400).send(err)
+  }
 })
 
 //Show
-app.get('/pokemon/:id', (req, res) => {
-    // res.send(req.params.id)
-    res.render('Show', {pokemonObj: pokemon[req.params.id]})
+app.get('/pokemon/:id', async (req, res) => {
+  try{
+   const foundPokemon = await Pokemon.findById(req.params.id)
+   res.render('Show', {pokemonObj: foundPokemon})
+  } catch(err) {
+    res.status(400).send(err)
+  }
 })
 
 

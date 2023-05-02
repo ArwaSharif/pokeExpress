@@ -1,7 +1,7 @@
 const React = require("react");
 const Nav = require('../views/components/Nav')
 const myStyle = {
-  color: "#ffcb05",
+  color: "#3663ad",
 };
 
 function capitalizeFirstLetter(string) {
@@ -11,14 +11,13 @@ class Index extends React.Component {
   render() {
     const { pokemon } = this.props;
     return (
-      <div style={{ textAlign: "center", backgroundColor: '#3663ad', color: "#ffcb05", fontFamily: 'cursive', fontSize: '18pt' }}>
+      <div style={{ textAlign: "center", backgroundImage: 'url(https://trumpwallpapers.com/wp-content/uploads/Pokemon-Wallpaper-03-1920-x-1080.jpg)', backgroundRepeat: 'no-repeat', backgroundSize: 'cover', color: "#3663ad", fontFamily: 'cursive', fontSize: '18pt' }}>
         <h1 style={myStyle}> Index Page </h1>
         <ol>
           {pokemon.map((pokemonObj, i) => {
             return (
               <li style={{listStyle: 'none'}}>
-                <a href={`/pokemon/${i}`} style={{color: "#ffcb05"}}>
-                  {"  "}{" "}
+                <a href={`/pokemon/${pokemonObj._id}`} style={{color: "#3663ad"}}>
                   <strong>{capitalizeFirstLetter(pokemonObj.name)}</strong>
                 </a>
               </li>

@@ -4,7 +4,7 @@ class Nav extends React.Component {
   render() {
     return (
       <nav >
-        <a style ={{color: "#ffcb05"}} href={this.props.link}>{this.props.text}</a>
+        <a style ={{color: "#3663ad"}} href={this.props.link}>{this.props.text}</a>
       </nav>
     );
   }
