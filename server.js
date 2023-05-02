@@ -9,6 +9,15 @@ app.engine("jsx", reactViewsEngine);
 app.set('views', './views')
 app.set("view engine", "jsx");
 
+//Custom Middleware
+// set to our entire website
+app.use(express.urlencoded({extended:false}))
+app.use((req, res, next) => {
+  console.log(`I run for all the routes`);
+  next();
+});
+
+
 //I.N.D.U.C.E.S
 //Index
 app.get("/", (req, res) => {
@@ -19,6 +28,19 @@ app.get("/pokemon", (req, res) => {
     // res.send(pokemon)
   res.render('Index', {pokemon});
 });
+
+
+//New
+app.get('/pokemon/new', (req, res) => {
+  res.render('New')
+})
+
+//Create
+
+app.post('/pokemon', (req, res) => {
+  pokemon.push(req.body)
+  res.redirect('/pokemon')
+})
 
 //Show
 app.get('/pokemon/:id', (req, res) => {

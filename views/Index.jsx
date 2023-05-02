@@ -1,5 +1,5 @@
 const React = require("react");
-
+const Nav = require('../views/components/Nav')
 const myStyle = {
   color: "#ffcb05",
 };
@@ -25,6 +25,8 @@ class Index extends React.Component {
             );
           })}
         </ol>
+
+          <Nav  link="/pokemon/New"  text="Click Here to Add a New Pokemon"/>
       </div>
     );
   }
